@@ -221,7 +221,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
       <footer className="site-footer">ASYA BEREZOVSKAYA</footer>
     </div>
   );
