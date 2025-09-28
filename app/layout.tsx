@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Asya Berezovskaya Psychotherapy",
+export const metadata: Metadata = {3
+  title: "Asya berezovskaya",
   description:
-    "Landing page for Asya Berezovskaya, LMHC – psychotherapy services in Brooklyn and Manhattan.",
+    "Психотерапевт Ася Березовская — консультации и психотерапия для взрослых онлайн и в Нью-Йорке.",
+
 };
 
 export default function RootLayout({
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body>{children}</body>
     </html>
   );

@@ -1,188 +1,227 @@
-const specialties = [
-  "Anxiety & panic",
-  "Relationship challenges",
-  "Life transitions",
-  "Creative blocks",
-  "Identity exploration",
-  "Trauma recovery",
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
+const accordionItems = [
+  {
+    title: "СХЕМА-ТЕРАПИЯ",
+    description:
+      "пожалуй, мой любимый метод психотерапии, основанный на идеях КПТ, психоанализа, теории привязанности и гештальт-терапии. работа с внутренним ребенком и его потребностями, деструктивными \"схемами\" и травмами",
+  },
+  {
+    title: "АНАЛИТИЧЕСКАЯ ПСИХОЛОГИЯ",
+    description:
+      "или юнгинианский анализ. одно из ответвлений психоанализа, где осмысляются глубинные, бессознательные процессы нашей психики, в том числе посредством снов, образов и архетипов",
+  },
+  {
+    title: "КПТ",
+    description:
+      "Когнитивно-поведенческая терапия: базовые навыки, направленные на изменение мышления и поведения, меняющие неэффективные привычки и паттерны, на продуктивные и более здоровые",
+  },
+];
+
+const services = [
+  {
+    title: "РЕГУЛЯРНАЯ ТЕРАПИЯ",
+    description: [
+      "самый популярный и подходящий формат для глубинной работы и запросов: встречи раз в неделю или раз в две недели, не реже. продолжительность 1 час",
+      "ЦЕНА $50",
+    ],
+    cta: "записаться",
+    image:
+      "https://images.squarespace-cdn.com/content/v1/66e08bfd1da3f722f7960f5c/9d92c3b4-82ee-4c0b-8920-d698c34b9973/andrew-ridley-Kt5hRENuotI-unsplash.jpg",
+  },
+  {
+    title: "ЭКСПРЕСС-КОНСУЛЬТАЦИЯ",
+    description: [
+      "точечная работа, коуч-сессия с применением терапевтических инструментов: быстро, эффективно и интенсивно. продолжительность 1,5 часа. обычно хватает 1-3 сессий для решения актуального запроса",
+      "ЦЕНА $70",
+    ],
+    cta: "ЗАПИСАТЬСЯ",
+    image:
+      "https://images.squarespace-cdn.com/content/v1/66e08bfd1da3f722f7960f5c/7d85f08c-f6be-4fc2-9f00-e56a080c8a72/ales-krivec-N-aTikX-b00-unsplash.jpg",
+  },
+  {
+    title: "ГРУППОВАЯ ТЕРАПИЯ",
+    description: [
+      "онлайн психотерапия в малых группах по 5-6 человек, всего 8 сессий по 2 часа. проводится несколько раз в год, уточнить когда следующая группа можно в личных сообщениях",
+      "ЦЕНА $280",
+    ],
+    cta: "НАЛИЧИЕ МЕСТ",
+    image:
+      "https://images.squarespace-cdn.com/content/v1/66e08bfd1da3f722f7960f5c/1410399b-0418-46b3-9ce4-a14058f75aab/bjorn-snelders-Cd3Ek7rNXSk-unsplash.jpg",
+  },
 ];
 
 export default function Home() {
+  const [activeAccordion, setActiveAccordion] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const totalSlides = services.length;
+
+  const goToSlide = (index: number) => {
+    const wrapped = (index + totalSlides) % totalSlides;
+    setCurrentSlide(wrapped);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 8000);
+
+    return () => clearInterval(timer);
+  }, [totalSlides]);
+
+  const marqueeText = useMemo(
+    () => Array.from({ length: 6 }, () => "душа потемки, но я с фонариком..."),
+    []
+  );
+
   return (
-    <main className="page">
+    <div className="site-shell">
       <header className="site-header">
-        <div className="container header-inner">
-          <div className="wordmark">Asya Berezovskaya, LMHC</div>
-          <nav className="primary-nav">
-            <a href="#approach">Approach</a>
-            <a href="#specialties">Specialties</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+        <div className="container header-grid">
+          <div className="brand">Asya berezovskaya</div>
+          <nav className="nav">
+            <a href="https://web.archive.org/web/20250212221932/https://www.asyaberezovskaya.net/blog" target="_blank" rel="noreferrer">
+              Blog
+            </a>
           </nav>
-          <a className="pill-button" href="#contact">
-            Book a consultation
-          </a>
         </div>
       </header>
 
-      <section className="hero">
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow">Psychotherapy in New York City & online</p>
-            <h1>
-              Gentle, collaborative therapy for people navigating complex emotional
-              landscapes.
-            </h1>
-            <p className="lede">
-              I help creatives, immigrants, LGBTQIA+ individuals, and thoughtful
-              professionals cultivate deeper self-understanding, heal from past
-              wounds, and move through the world with more ease.
-            </p>
-            <div className="cta-group">
-              <a className="cta primary" href="#contact">
-                Schedule a call
-              </a>
-              <a className="cta secondary" href="#approach">
-                Explore approach
+      <main>
+        <section className="hero">
+          <div className="container hero-grid">
+            <div className="hero-image">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/66e08bfd1da3f722f7960f5c/96c5192d-bcf4-47f1-8a81-3fd877f2a103/blog.jpg"
+                alt="Ася Березовская"
+              />
+            </div>
+            <div className="hero-copy">
+              <h1>psychotherapist</h1>
+              <p>
+                Привет, мой друг. Меня зовут Ася и я психолог-психотерапевт. Живу в Нью-Йорке и
+                работаю с людьми по всему миру, помогая им обрести СЕБЯ. Моя цель и призвание -
+                сделать этот мир чуточку лучше через раскрытие в людях их собственного потенциала
+                души. Я, как проводник в тонкий мир психики, нежно и бережно возьму тебя за руку и
+                проведу по удивительному пути к твоей САМОСТИ, покажу тебя подлинного и аутентичного,
+                твой свет и твою тень, сознательное и бессознательное. Позволь мне помочь тебе
+                УЗНАТЬ СЕБЯ и изменить свою жизнь к лучшему
+              </p>
+              <a className="primary-button" href="https://t.me/AsyaBerezovskaya" target="_blank" rel="noreferrer">
+                ЗАПИСАТЬСЯ
               </a>
             </div>
           </div>
-          <aside className="credentials-card">
-            <p className="card-eyebrow">Credentials</p>
-            <ul>
-              <li>Licensed Mental Health Counselor (NY)</li>
-              <li>M.S. Counseling, Columbia University</li>
-              <li>Advanced training in psychodynamic & relational therapy</li>
-              <li>Fluent in English & Russian</li>
-            </ul>
-          </aside>
-        </div>
-      </section>
+        </section>
 
-      <section id="approach" className="section">
-        <div className="container split">
-          <h2>A warm, attuned therapeutic relationship</h2>
-          <div className="section-body">
-            <p>
-              Our work together is grounded in deep listening, cultural humility,
-              and curiosity. I draw from psychodynamic, attachment-based, and
-              somatic modalities to help you connect with your emotions, expand
-              your capacity for joy, and build relationships that feel supportive
-              and nourishing.
-            </p>
-            <p>
-              Sessions move at a pace that feels right for you. We will notice
-              patterns, experiment with new ways of being, and anchor into the
-              resources that already exist within you.
-            </p>
+        <section className="approach">
+          <div className="container approach-grid">
+            <div className="approach-copy">
+              <h2>
+                <em>МОЙ ПОДХОД</em>
+              </h2>
+              <p>
+                Я работаю в интегративном подходе, совмещая разные школы и направления
+                психотерапии. Мне нравится иметь как можно больше инструментов и методик в моем
+                арсенале, и подбирать под каждого клиента индивидуально те практики, которые будут
+                работать именно для него. Ведь каждый человек - отдельный мир, со своими потайными
+                комнатами в бессознательном. И чем больше разных ключей я имею, тем выше шанс открыть
+                каждую дверь, даже ту, что казалось невозможно взломать…
+              </p>
+            </div>
+            <div className="accordion" role="tablist">
+              {accordionItems.map((item, index) => {
+                const isOpen = activeAccordion === index;
+                return (
+                  <div key={item.title} className={`accordion-item ${isOpen ? "open" : ""}`}>
+                    <button
+                      type="button"
+                      className="accordion-trigger"
+                      aria-expanded={isOpen}
+                      onClick={() =>
+                        setActiveAccordion((prev) => (prev === index ? -1 : index))
+                      }
+                    >
+                      <span>{item.title}</span>
+                      <span className="accordion-icon" aria-hidden>
+                        <span />
+                        <span />
+                      </span>
+                    </button>
+                    <div className="accordion-panel" role="region">
+                      <p>{item.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="specialties" className="section highlight">
-        <div className="container split">
-          <div>
-            <p className="eyebrow">Areas of focus</p>
-            <h2>Support tailored to what matters most to you</h2>
-            <p>
-              Together we can address emotional stuckness, relational patterns,
-              and the invisible pressures that shape your day-to-day life.
-            </p>
-          </div>
-          <ul className="specialties-list">
-            {specialties.map((item) => (
-              <li key={item}>
-                <span aria-hidden className="dot" />
-                {item}
-              </li>
+        <section className="marquee" aria-label="манифест">
+          <div className="marquee-track">
+            {marqueeText.map((text, index) => (
+              <span key={`${text}-${index}`}>{text}</span>
             ))}
-          </ul>
-        </div>
-      </section>
-
-      <section id="about" className="section">
-        <div className="container split about-grid">
-          <div>
-            <p className="eyebrow">About Asya</p>
-            <h2>Thoughtful care rooted in lived experience</h2>
-            <p>
-              As a queer immigrant and former creative professional, I understand
-              the complexity of navigating multiple identities. My practice is a
-              place where your nuance, ambivalence, and artistry are welcome.
-            </p>
-            <p>
-              We will co-create a space that honors your inner wisdom, while
-              gently challenging the beliefs that keep you from feeling grounded
-              and empowered.
-            </p>
           </div>
-          <div className="about-cards">
-            <div className="info-card">
-              <h3>Practice details</h3>
-              <ul>
-                <li>Individual therapy for adults (18+)</li>
-                <li>Virtual sessions across New York State</li>
-                <li>Limited in-person availability in Brooklyn</li>
-                <li>Sliding scale slots reserved for community care</li>
-              </ul>
-            </div>
-            <div className="info-card outline">
-              <h3>Values</h3>
-              <p>
-                Anti-oppressive, collaborative, and culturally responsive therapy
-                that centers your autonomy.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="contact" className="section contact">
-        <div className="container split contact-grid">
-          <div>
-            <p className="eyebrow">Get in touch</p>
-            <h2>Ready to begin? Let’s connect.</h2>
-            <p>
-              Share a few details about what you&apos;re hoping for, and I will reach
-              out within two business days to schedule a complimentary 20-minute
-              consultation.
-            </p>
-            <div className="info-card outline">
-              <p>
-                <strong>Email:</strong>{" "}
-                <a href="mailto:hello@asyaberezovskaya.net">hello@asyaberezovskaya.net</a>
-              </p>
-              <p>
-                <strong>Location:</strong> Brooklyn Heights & online for clients
-                across New York State.
-              </p>
+        <section className="services" aria-label="форматы работы">
+          <div className="services-inner">
+            {services.map((service, index) => {
+              const isActive = currentSlide === index;
+              return (
+                <article
+                  key={service.title}
+                  className={`service-slide ${isActive ? "active" : ""}`}
+                  style={{
+                    backgroundImage: `linear-gradient(180deg, rgba(12, 12, 12, 0.55), rgba(12, 12, 12, 0.55)), url(${service.image})`,
+                  }}
+                  aria-hidden={!isActive}
+                >
+                  <div className="service-card">
+                    <h3>{service.title}</h3>
+                    {service.description.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                    <a
+                      className="service-button"
+                      href="https://t.me/AsyaBerezovskaya"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {service.cta}
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+            <div className="service-controls" aria-label="Слайдер форматов работы">
+              <button type="button" onClick={() => goToSlide(currentSlide - 1)} aria-label="Предыдущий формат">
+                ←
+              </button>
+              <div className="service-dots">
+                {services.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    aria-label={`Перейти к слайду ${index + 1}`}
+                    className={currentSlide === index ? "active" : ""}
+                    onClick={() => goToSlide(index)}
+                  />
+                ))}
+              </div>
+              <button type="button" onClick={() => goToSlide(currentSlide + 1)} aria-label="Следующий формат">
+                →
+              </button>
             </div>
           </div>
-          <form className="contact-form">
-            <label>
-              <span>Name</span>
-              <input type="text" placeholder="Your full name" />
-            </label>
-            <label>
-              <span>Email</span>
-              <input type="email" placeholder="you@email.com" />
-            </label>
-            <label>
-              <span>How can I help?</span>
-              <textarea rows={4} placeholder="Share a bit about what brings you to therapy" />
-            </label>
-            <button type="submit">Send message</button>
-            <p className="disclaimer">
-              This form is for initial contact only and does not create a
-              therapeutic relationship.
-            </p>
-          </form>
-        </div>
-      </section>
-
-      <footer className="site-footer">
-        © {new Date().getFullYear()} Asya Berezovskaya, LMHC
-      </footer>
-    </main>
+        </section>
+      </main>
+      <footer className="site-footer">ASYA BEREZOVSKAYA</footer>
+    </div>
   );
 }
