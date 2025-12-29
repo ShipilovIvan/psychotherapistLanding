@@ -152,7 +152,7 @@ export default function Home() {
           <div className="wrap">
             <span className="section-label">форматы</span>
             <h2 id="services-title">Выбирайте комфортный формат</h2>
-            <div className="services-slider" role="list">
+            <div className="services-grid" role="list">
               {services.map((service) => (
                 <article key={service.title} className="service-card" role="listitem">
                   <div className="service-number">{service.number}</div>
