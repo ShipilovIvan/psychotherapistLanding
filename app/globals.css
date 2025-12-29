@@ -312,7 +312,7 @@ main {
   max-width: 520px;
 }
 
-.services-slider {
+.services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
@@ -478,7 +478,7 @@ main {
     gap: 48px;
   }
 
-  .services-slider {
+  .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -504,17 +504,13 @@ main {
     font-size: 12px;
   }
 
-  .services-slider {
+  .services-grid {
     grid-template-columns: 1fr;
   }
 
   .service-card {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-
-  .service-number {
-    font-size: 24px;
   }
 
   .quote-block {
